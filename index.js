@@ -7,9 +7,11 @@ app.use(express.urlencoded({ extended: true }))
 let users = [
     {id:1, username: 'Test1', password: "Test1Pass"}
 ]
+//App entry
 app.get('/', (req,res) => {
     res.send('Welcome to Edvora')
 })
+//Registration
 app.post('/register',(req,res) =>{
     const user = {
         id: users.length + 1,
@@ -20,6 +22,7 @@ app.post('/register',(req,res) =>{
     console.log("User added")
     res.json(user)
 })
+//Login
 app.post('/login', (req,res) => {
 const isRegistered = users.find((user) =>{
     return user.username === req.body.username && user.password === req.body.password
@@ -30,7 +33,7 @@ if(isRegistered){
     res.send('Username and Password is incorrect.')
 }
 })
-
+// Change Password
 app.post('/change-password', (req,res) => {
     const newPassParams = {
         username: req.body.username,
